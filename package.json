@@ -6,7 +6,7 @@
     "start": "webpack serve --open",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "test:e2e": "start-test start http://localhost:3001 cy:run",
+    "test:e2e": "start-server-and-test 'npm start' http://localhost:3001 cy:run",
     "test:integration": "jest",
     "test": "npm-run-all test:*",
     "build": "webpack"

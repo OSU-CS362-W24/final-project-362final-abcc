@@ -35,7 +35,6 @@ test("Verify data is sent to generateChartImg", async () => {
     const generateChart = domTesting.getByRole(document, "button", {name: "Generate chart"})
 
     // Spy on generateChartImg
-    // const spy = jest.spyOn(generateChartImgModule, "generateChartImg").mockResolvedValue("http://placekitten.com/480/480");
     jest.mock("../lib/generateChartImg.js")
     const spy = require("../lib/generateChartImg")
 

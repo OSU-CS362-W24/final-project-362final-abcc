@@ -42,3 +42,20 @@ describe('saveChart', () => {
         expect(loadAllSavedCharts()).toEqual([chart1, chart2])
     })
 });
+
+describe('loadAllSavedCharts', () => {
+    test('loads and returns the array of all saved charts', () => {
+        const chart1 = {data: [1, 2, 3]}
+        const chart2 = {data: [4, 5, 6]}
+        saveChart(chart1)
+        saveChart(chart2)
+        expect(loadAllSavedCharts()).toEqual([chart1, chart2])
+    })
+    test('returns an empty array if there are no saved charts', () => {
+        expect(loadAllSavedCharts()).toEqual([])
+    })
+    test('throws a SyntaxError if the saved charts are not valid JSON', () => {
+        localStorage.setItem("savedCharts", "invalid JSON")
+        expect(() => loadAllSavedCharts()).toThrow(SyntaxError)
+    })
+});

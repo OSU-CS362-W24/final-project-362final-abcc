@@ -59,3 +59,45 @@ describe('loadAllSavedCharts', () => {
         expect(() => loadAllSavedCharts()).toThrow(SyntaxError)
     })
 });
+
+describe('loadSavedChart', () => {
+    test('loads and returns a specific chart from the array of saved charts', () => {
+        const chart1 = {data: [1, 2, 3]}
+        const chart2 = {data: [4, 5, 6]}
+        const chart3 = {data: [7, 8, 9]}
+        saveChart(chart1)
+        saveChart(chart2)
+        saveChart(chart3)
+        expect(loadSavedChart(2)).toEqual(chart3)
+    })
+    test('returns an empty object if the index is out of range', () => {
+        expect(loadSavedChart(100)).toEqual({})
+    })
+});
+
+describe('updateCurrentChartData', () => {
+    test('updates the current chart data', () => {
+        const chart = {data: [1, 2, 3]}
+        updateCurrentChartData(chart)
+        expect(loadCurrentChartData()).toEqual(chart)
+    })
+
+    test('overwrites the existing current chart data', () => {
+        const chart1 = {data: [1, 2, 3]}
+        const chart2 = {data: [4, 5, 6]}
+        updateCurrentChartData(chart1)
+        updateCurrentChartData(chart2)
+        expect(loadCurrentChartData()).toEqual(chart2)
+    })
+});
+
+describe('loadCurrentChartData', () => {
+    test('loads and returns the data for the chart currently being built', () => {
+        const chart = {data: [1, 2, 3]}
+        updateCurrentChartData(chart)
+        expect(loadCurrentChartData()).toEqual(chart)
+    })
+    test('returns an empty object if there is no current chart data', () => {
+        expect(loadCurrentChartData()).toEqual({})
+    })
+});

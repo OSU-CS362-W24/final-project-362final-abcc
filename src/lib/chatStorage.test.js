@@ -27,16 +27,16 @@ describe('saveChart', () => {
     })
 
     test('overwrites the existing data for a chart if an index is specified', () => {
-        const chart1 = {data: [1, 2, 3]}
-        const chart2 = {data: [4, 5, 6]}
+        const chart1 = {type: 'line', data: [1, 2, 3]}
+        const chart2 = {type: 'scatter', data: [4, 5, 6]}
         saveChart(chart1)
         saveChart(chart2, 0)
         expect(loadAllSavedCharts()).toEqual([chart2])
     })
 
     test('adds a new chart to the end of the array of charts if no index is specified', () => {
-        const chart1 = {data: [1, 2, 3]}
-        const chart2 = {data: [4, 5, 6]}
+        const chart1 = {type: 'line', data: [1, 2, 3]}
+        const chart2 = {type: 'scatter', data: [4, 5, 6]}
         saveChart(chart1)
         saveChart(chart2)
         expect(loadAllSavedCharts()).toEqual([chart1, chart2])

@@ -1,1 +1,15 @@
 import '@testing-library/cypress/add-commands'
+
+Cypress.Commands.add('enterChartInfo', function() {
+    cy.findByText('Chart title').type('Test Chart')
+    cy.findByText('+').click()
+    cy.findByText('+').click()
+    cy.findByTestId('x-label-input').type("Time")
+    cy.findByTestId('y-label-input').type("Money")
+    cy.findAllByText('X').eq(0).type('1')
+    cy.findAllByText('X').eq(1).type('2')
+    cy.findAllByText('X').eq(2).type('3')
+    cy.findAllByText('Y').eq(0).type('3')
+    cy.findAllByText('Y').eq(1).type('5')
+    cy.findAllByText('Y').eq(2).type('9');
+})

@@ -1,15 +1,28 @@
 import '@testing-library/cypress/add-commands'
 
-Cypress.Commands.add('enterChartInfo', function() {
+Cypress.Commands.add('enterChartInfo', function(x1, x2, x3, y1, y2, y3) {
     cy.findByText('Chart title').type('Test Chart')
     cy.findByText('+').click()
     cy.findByText('+').click()
     cy.findByTestId('x-label-input').type("Time")
     cy.findByTestId('y-label-input').type("Money")
-    cy.findAllByText('X').eq(0).type('1')
-    cy.findAllByText('X').eq(1).type('2')
-    cy.findAllByText('X').eq(2).type('3')
-    cy.findAllByText('Y').eq(0).type('3')
-    cy.findAllByText('Y').eq(1).type('5')
-    cy.findAllByText('Y').eq(2).type('9');
+    cy.findAllByText('X').eq(0).type(x1)
+    cy.findAllByText('X').eq(1).type(x2)
+    cy.findAllByText('X').eq(2).type(x3)
+    cy.findAllByText('Y').eq(0).type(y1)
+    cy.findAllByText('Y').eq(1).type(y2)
+    cy.findAllByText('Y').eq(2).type(y3);
+})
+
+
+Cypress.Commands.add('checkChartInfo', function(x1, x2, x3, y1, y2, y3) {
+    cy.findByLabelText('Chart title').should('have.value', 'Test Chart')
+    cy.findByLabelText('X label').should('have.value', "Time")
+    cy.findByLabelText('Y label').should('have.value', 'Money')
+    cy.findAllByLabelText('X').eq(0).should('have.value', x1)
+    cy.findAllByLabelText('X').eq(1).should('have.value', x2)
+    cy.findAllByLabelText('X').eq(2).should('have.value', x3)
+    cy.findAllByLabelText('Y').eq(0).should('have.value', y1)
+    cy.findAllByLabelText('Y').eq(1).should('have.value', y2)
+    cy.findAllByLabelText('Y').eq(2).should('have.value', y3)
 })
